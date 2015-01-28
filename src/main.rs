@@ -1,11 +1,11 @@
 // vi: sw=2 ts=2 
-use std::os;
-
 fn main() {
-  let args = os::args();
-  let first_arg: &str = args[1].as_slice();
-  let expanded: &str = expand(first_arg);
-  println!("{:?}", expanded);
+  match std::os::args().as_slice() {
+    [] => println!("need more arguments"),
+    [ref x, ..] if x.as_slice() == "-h" => println!("Help!"),
+    [ref a, ref b] if a.as_slice() == "-c" => println!("{:?}", expand(b.as_slice())),
+    args @ _ => println!("unrecognised arguments: {:?}", args)
+  }
 }
 
 fn expand(cidr: &str) -> &str {

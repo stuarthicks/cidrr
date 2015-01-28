@@ -3,7 +3,3 @@
 name = "cidrr"
 version = "0.0.1"
 authors = ["Stuart Hicks <contact@stuarthicks.me>"]
-
-[dependencies]
-docopt = "*"
-rustc-serialize = "*"
