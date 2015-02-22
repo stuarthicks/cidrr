@@ -1,30 +1,4 @@
 [root]
 name = "cidrr"
 version = "0.0.1"
-<<<<<<< HEAD
-=======
-dependencies = [
- "docopt 0.6.39 (registry+https://github.com/rust-lang/crates.io-index)",
- "rustc-serialize 0.2.15 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
-name = "docopt"
-version = "0.6.39"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-dependencies = [
- "regex 0.1.15 (registry+https://github.com/rust-lang/crates.io-index)",
- "rustc-serialize 0.2.15 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
-name = "regex"
-version = "0.1.15"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-
-[[package]]
-name = "rustc-serialize"
-version = "0.2.15"
-source = "registry+https://github.com/rust-lang/crates.io-index"
->>>>>>> update for latest rust nightly
 
