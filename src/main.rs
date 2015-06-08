@@ -5,13 +5,14 @@ fn main() {
   let args: Vec<String> = env::args().map(|arg| arg.to_string()).collect();
   let first_arg: &str = &args[1];
   let expanded: &str = expand(first_arg);
-  println!("{:?}", expanded);
+  println!("result: {:?}", expanded);
 }
 
 fn expand(cidr: &str) -> &str {
   let bits: &str = cidr.split('/').next().expect("Invalid CIDR");
   for i in bits.split('.') {
-    println!("{:?}", i)
+    let encoded: &[u8] = i.as_bytes();
+    println!("{:?}", encoded)
   }
   return bits;
 }
