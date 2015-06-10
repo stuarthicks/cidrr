@@ -24,6 +24,12 @@ fn convert_ip_to_binary(ip: String) -> String {
   return binary.connect("");
 }
 
+fn convert_binary_to_ip(binary: String) -> String {
+  let partitions: Vec<u8> = From::from(binary.as_bytes());
+  println!("{:?}", partitions);
+  return "Not Implemented".to_string();
+}
+
 #[test]
 fn slash_zero_returns_same_ip() {
   let res = expand("10.1.2.3/0");
@@ -36,4 +42,12 @@ fn it_converts_ip_string_to_binary() {
   assert!(convert_ip_to_binary("127.0.1.1".to_string()) == "01111111000000000000000100000001");
   assert!(convert_ip_to_binary("192.168.0.1".to_string()) == "11000000101010000000000000000001");
   assert!(convert_ip_to_binary("169.254.169.254".to_string()) == "10101001111111101010100111111110");
+}
+
+#[test]
+fn it_converts_binary_to_ip_string() {
+  assert!(convert_binary_to_ip("00001010000000010000001000000011".to_string()) == "10.1.2.3");
+  assert!(convert_binary_to_ip("01111111000000000000000100000001".to_string()) == "127.0.1.1");
+  assert!(convert_binary_to_ip("01111111000000000000000100000001".to_string()) == "192.168.0.1");
+  assert!(convert_binary_to_ip("10101001111111101010100111111110".to_string()) == "169.254.169.254");
 }
