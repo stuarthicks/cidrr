@@ -25,8 +25,13 @@ fn convert_ip_to_binary(ip: String) -> String {
 }
 
 fn convert_binary_to_ip(binary: String) -> String {
-    let partitions: Vec<u8> = From::from(binary.as_bytes());
-    println!("{:?}", partitions);
+    let bin: &str = &binary;
+    let bin_codepoints: Vec<_> = bin.chars().collect();
+    for section in bin_codepoints.chunks(8) {
+        let bit: String = section.iter().cloned().collect::<String>();
+        println!("{:?}", bit);
+        // TODO: parse into u8
+    }
     return "Not Implemented".to_string();
 }
 
