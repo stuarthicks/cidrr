@@ -1,4 +1,4 @@
-default: clean test build bench ci
+default: clean test bench ci
 
 clean:
 	cargo clean
