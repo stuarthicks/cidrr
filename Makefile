@@ -4,7 +4,7 @@ clean:
 	cargo clean
 
 test:
-	cargo test --verbose
+	cargo test --verbose -- --nocapture
 
 build:
 	cargo build --verbose
