@@ -1,4 +1,4 @@
-default: clean test bench ci
+default: clean test bench
 
 clean:
 	cargo clean
@@ -8,9 +8,12 @@ test:
 
 build:
 	cargo build --verbose
-	cargo doc
+	cargo doc --verbose
 
-bench:
+release: test
+	cargo build --verbose --release
+
+bench: build
 	cargo bench
 
 update:
