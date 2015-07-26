@@ -4,7 +4,7 @@ clean:
 	cargo clean
 
 test:
-	cargo test --verbose -- --nocapture
+	RUST_BACKTRACE=1 cargo test --verbose -- --nocapture
 
 build:
 	cargo build --verbose
