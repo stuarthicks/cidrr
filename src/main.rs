@@ -27,12 +27,12 @@ pub fn convert_ip_to_binary(ip: String) -> String {
 pub fn convert_binary_to_ip(binary: String) -> String {
     let bin: &str = &binary;
     let bin_codepoints: Vec<_> = bin.chars().collect();
+    let mut output: Vec<String> = Vec::new();
     for section in bin_codepoints.chunks(8) {
         let bit: String = section.iter().cloned().collect::<String>();
-        println!("{:?}", bit);
-        // TODO: parse into u8
+        output.push(format!["{}", u8::from_str_radix(&bit, 2).unwrap()]);
     }
-    return "Not Implemented".to_string();
+    return output.connect(".");
 }
 
 #[cfg(test)]
@@ -57,7 +57,7 @@ mod tests {
     fn it_converts_binary_to_ip_string() {
         assert_eq!("10.1.2.3", convert_binary_to_ip("00001010000000010000001000000011".to_string()));
         assert_eq!("127.0.1.1", convert_binary_to_ip("01111111000000000000000100000001".to_string()));
-        assert_eq!("192.168.0.1", convert_binary_to_ip("01111111000000000000000100000001".to_string()));
+        assert_eq!("192.168.0.1", convert_binary_to_ip("11000000101010000000000000000001".to_string()));
         assert_eq!("169.254.169.254", convert_binary_to_ip("10101001111111101010100111111110".to_string()));
     }
 }
