@@ -68,9 +68,9 @@ mod tests {
     use super::*;
 
     #[test]
-    fn slash_zero_returns_same_ip() {
+    fn slash_32_returns_same_ip() {
         let expected: Vec<String> = vec!["10.1.2.3".to_string()];
-        assert_eq![expected, expand("10.1.2.3/0")];
+        assert_eq![expected, expand("10.1.2.3/32")];
     }
 
     #[test]
