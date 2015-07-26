@@ -2,7 +2,7 @@ use docopt;
 use std::process::exit;
 
 static VERSION: &'static str =
-    "cidrr version 0.0.1 by Stuart Hicks (https://github.com/stuarthicks/cidrr)";
+    "cidrr version 0.1.0 by Stuart Hicks (https://github.com/stuarthicks/cidrr)";
 
 static USAGE: &'static str = "
 Usage: cidrr <CIDR>
