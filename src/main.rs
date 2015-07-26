@@ -6,7 +6,9 @@ fn main() {
     let args: Vec<String> = env::args().map(|arg| arg.to_string()).collect();
     let first_arg: &str = &args[1];
     let expanded: Vec<String> = expand(first_arg);
-    println!["result: {:?}", expanded];
+    for ip in expanded.iter() {
+        println!["{}", ip];
+    }
 }
 
 /// Given a string representation of a cidr block, returns
