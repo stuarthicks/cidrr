@@ -5,15 +5,16 @@ use std::env;
 fn main() {
     let args: Vec<String> = env::args().map(|arg| arg.to_string()).collect();
     let first_arg: &str = &args[1];
-    let expanded: String = expand(first_arg);
+    let expanded: Vec<String> = expand(first_arg);
     println!["result: {:?}", expanded];
 }
 
-pub fn expand(cidr: &str) -> String {
-    let ip: &str = cidr.split('/').next().expect("Invalid CIDR: Must contain a forward slash.");
-    let binary: String = ip_to_binary(ip.to_string());
-    println!["{:?}", binary];
-    return ip.to_string();
+pub fn expand(cidr: &str) -> Vec<String> {
+    let args = cidr.split('/');
+    let ip: String = args.clone().nth(0).unwrap().to_string();
+    let range: &str = args.clone().nth(1).unwrap();
+    let parsed_range: u8 = u8::from_str_radix(range, 10).unwrap();
+    return all_with_prefix(ip, parsed_range);
 }
 
 #[allow(unused_variables)]
@@ -63,8 +64,8 @@ mod tests {
 
     #[test]
     fn slash_zero_returns_same_ip() {
-        let res = expand("10.1.2.3/0");
-        assert_eq!["10.1.2.3", res];
+        let expected: Vec<String> = vec!["10.1.2.3".to_string()];
+        assert_eq![expected, expand("10.1.2.3/0")];
     }
 
     #[test]
