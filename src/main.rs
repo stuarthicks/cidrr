@@ -1,24 +1,18 @@
 // vi: sw=4 ts=4
+extern crate docopt;
+
 use std::env;
+
+mod args;
+use args::Arguments;
 
 #[allow(dead_code)]
 fn main() {
-    let args: Vec<String> = env::args().map(|arg| arg.to_string()).collect();
-    let first_arg: &str = &args[1];
-    let expanded: Vec<String> = expand(first_arg);
+    let cidr_args = Arguments::parse(env::args());
+    let expanded: Vec<String> = all_with_prefix(cidr_args.base_ip, cidr_args.fixed_bits);
     for ip in expanded.iter() {
         println!["{}", ip];
     }
-}
-
-/// Given a string representation of a cidr block, returns
-/// a Vec<String> of ip addresses covered by that cidr.
-pub fn expand(cidr: &str) -> Vec<String> {
-    let args = cidr.split('/');
-    let ip: String = args.clone().nth(0).unwrap().to_string();
-    let range: &str = args.clone().nth(1).unwrap();
-    let parsed_range: u8 = u8::from_str_radix(range, 10).unwrap();
-    return all_with_prefix(ip, parsed_range);
 }
 
 /// Given an ip and a number of fixed bits, calculate possible ip addresses.
@@ -68,12 +62,6 @@ pub fn binary_to_ip(binary: String) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
-
-    #[test]
-    fn slash_32_returns_same_ip() {
-        let expected: Vec<String> = vec!["10.1.2.3".to_string()];
-        assert_eq![expected, expand("10.1.2.3/32")];
-    }
 
     #[test]
     fn it_converts_ip_string_to_binary() {
