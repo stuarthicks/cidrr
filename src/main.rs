@@ -9,6 +9,8 @@ fn main() {
     println!["result: {:?}", expanded];
 }
 
+/// Given a string representation of a cidr block, returns
+/// a Vec<String> of ip addresses covered by that cidr.
 pub fn expand(cidr: &str) -> Vec<String> {
     let args = cidr.split('/');
     let ip: String = args.clone().nth(0).unwrap().to_string();
@@ -17,6 +19,7 @@ pub fn expand(cidr: &str) -> Vec<String> {
     return all_with_prefix(ip, parsed_range);
 }
 
+/// Given an ip and a number of fixed bits, calculate possible ip addresses.
 #[allow(unused_variables)]
 pub fn all_with_prefix(base: String, fixed: u8) -> Vec<String> {
     let fixed_prefix: String = ip_to_binary(base.clone()).chars().take(fixed as usize).collect();
@@ -38,6 +41,7 @@ pub fn all_with_prefix(base: String, fixed: u8) -> Vec<String> {
     return set;
 }
 
+/// Convert a conventional string representation of an ip address to it's binary representation.
 pub fn ip_to_binary(ip: String) -> String {
     let mut binary: Vec<String> = Vec::new();
     for i in ip.split('.') {
@@ -47,6 +51,7 @@ pub fn ip_to_binary(ip: String) -> String {
     return binary.connect("");
 }
 
+/// Convert a binary representation of an ip address to conventional human-readable one.
 pub fn binary_to_ip(binary: String) -> String {
     let bin: &str = &binary;
     let bin_codepoints: Vec<_> = bin.chars().collect();
