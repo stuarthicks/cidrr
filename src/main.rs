@@ -17,7 +17,7 @@ fn main() {
 /// Given an ip and a number of fixed bits, calculate possible ip addresses.
 pub fn all_with_prefix(base: String, fixed: u8) -> Vec<String> {
     let fixed_prefix: String = ip_to_binary(base.clone()).chars().take(fixed as usize).collect();
-    let range_to_calculate: usize = 32 - fixed_prefix.len();
+    let range_to_calculate: usize = 32 - fixed as usize;
     if range_to_calculate == 0 {
         return vec![base.clone()];
     }
