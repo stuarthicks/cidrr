@@ -1,13 +1,17 @@
 // vi: sw=4 ts=4
 extern crate docopt;
 
-use std::env;
+use std::{env, process};
 
 mod args;
 use args::Arguments;
 
 fn main() {
     let cidr_args = Arguments::parse(env::args());
+    if cidr_args.fixed_bits>32 {
+        println!["Bits out of range!"];
+        process::exit(-1);
+    }
     let expanded: Vec<String> = all_with_prefix(cidr_args.base_ip, cidr_args.fixed_bits);
     for ip in expanded.iter() {
         println!["{}", ip];
