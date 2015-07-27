@@ -6,7 +6,6 @@ use std::env;
 mod args;
 use args::Arguments;
 
-#[allow(dead_code)]
 fn main() {
     let cidr_args = Arguments::parse(env::args());
     let expanded: Vec<String> = all_with_prefix(cidr_args.base_ip, cidr_args.fixed_bits);
