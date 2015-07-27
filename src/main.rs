@@ -1,14 +1,17 @@
 // vi: sw=4 ts=4
 extern crate docopt;
 
-use std::env;
+use std::{env, process};
 
 mod args;
 use args::Arguments;
 
-#[allow(dead_code)]
 fn main() {
     let cidr_args = Arguments::parse(env::args());
+    if cidr_args.fixed_bits>32 {
+        println!["Bits out of range!"];
+        process::exit(-1);
+    }
     let expanded: Vec<String> = all_with_prefix(cidr_args.base_ip, cidr_args.fixed_bits);
     for ip in expanded.iter() {
         println!["{}", ip];
@@ -16,17 +19,13 @@ fn main() {
 }
 
 /// Given an ip and a number of fixed bits, calculate possible ip addresses.
-#[allow(unused_variables)]
 pub fn all_with_prefix(base: String, fixed: u8) -> Vec<String> {
     let fixed_prefix: String = ip_to_binary(base.clone()).chars().take(fixed as usize).collect();
-    let range_to_calculate: usize = 32 - fixed_prefix.len();
+    let range_to_calculate: usize = 32 - fixed as usize;
     if range_to_calculate == 0 {
         return vec![base.clone()];
     }
-    let mut max: Vec<String> = Vec::with_capacity(range_to_calculate);
-    for i in 0..range_to_calculate {
-        max.push("1".to_string());
-    }
+    let max : Vec<String> = (0..range_to_calculate).map(|_| "1".to_string()).collect() ;
     let max_num = u32::from_str_radix(&(max.clone().connect("")), 2).unwrap();
     let mut set: Vec<String> = Vec::new();
     for i in 0..max_num {
