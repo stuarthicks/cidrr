@@ -16,17 +16,13 @@ fn main() {
 }
 
 /// Given an ip and a number of fixed bits, calculate possible ip addresses.
-#[allow(unused_variables)]
 pub fn all_with_prefix(base: String, fixed: u8) -> Vec<String> {
     let fixed_prefix: String = ip_to_binary(base.clone()).chars().take(fixed as usize).collect();
     let range_to_calculate: usize = 32 - fixed_prefix.len();
     if range_to_calculate == 0 {
         return vec![base.clone()];
     }
-    let mut max: Vec<String> = Vec::with_capacity(range_to_calculate);
-    for i in 0..range_to_calculate {
-        max.push("1".to_string());
-    }
+    let max : Vec<String> = (0..range_to_calculate).map(|_| "1".to_string()).collect() ;
     let max_num = u32::from_str_radix(&(max.clone().connect("")), 2).unwrap();
     let mut set: Vec<String> = Vec::new();
     for i in 0..max_num {
