@@ -26,7 +26,7 @@ pub fn all_with_prefix(base: String, fixed: u8) -> Vec<String> {
         return vec![base.clone()];
     }
     let max : Vec<String> = (0..range_to_calculate).map(|_| "1".to_string()).collect() ;
-    let max_num = u32::from_str_radix(&(max.clone().connect("")), 2).unwrap();
+    let max_num = u32::from_str_radix(&(max.clone().join("")), 2).unwrap();
     let mut set: Vec<String> = Vec::new();
     for i in 0..max_num {
         let suffix: String = format!["{:b}", i as u32];
@@ -43,7 +43,7 @@ pub fn ip_to_binary(ip: String) -> String {
         let encoded: u8 = u8::from_str_radix(i, 10).unwrap();
         binary.push(format!["{:08b}", encoded]);
     }
-    return binary.connect("");
+    return binary.join("");
 }
 
 /// Convert a binary representation of an ip address to conventional human-readable one.
@@ -55,7 +55,7 @@ pub fn binary_to_ip(binary: String) -> String {
         let bit: String = section.iter().cloned().collect::<String>();
         output.push(format!["{}", u8::from_str_radix(&bit, 2).unwrap()]);
     }
-    return output.connect(".");
+    return output.join(".");
 }
 
 #[cfg(test)]
