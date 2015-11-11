@@ -9,6 +9,11 @@ matrix:
   allow_failures:
     - rust: nightly
 
+cache:
+    directories:
+        - target/debug/deps
+        - target/debug/build
+
 after_success: |
   wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz &&
   tar xzf master.tar.gz &&
