@@ -8,24 +8,24 @@ use std::process::exit;
 
 use docopt::Docopt;
 
-mod args;
-use args::Args;
+mod cli;
+use cli::Args;
 
 mod domain;
 use domain::Cidr;
 
 fn main() {
-    let args: Args = Docopt::new(args::USAGE)
+    let args: Args = Docopt::new(cli::USAGE)
         .and_then(|d| d.decode())
         .unwrap_or_else(|e| e.exit());
 
     if args.flag_version {
-        println!("{}", args::VERSION);
+        println!("{}", cli::VERSION);
         exit(0);
     }
 
     if args.flag_help {
-        println!("{}", args::USAGE);
+        println!("{}", cli::USAGE);
         exit(0);
     }
 

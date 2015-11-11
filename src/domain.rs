@@ -1,5 +1,5 @@
-use args;
-use args::Args;
+use cli;
+use cli::Args;
 
 pub struct Cidr {
     pub base_ip: String,
@@ -7,7 +7,7 @@ pub struct Cidr {
 }
 
 impl Cidr {
-    pub fn from_args(args : args::Args) -> Cidr {
+    pub fn from_args(args : cli::Args) -> Cidr {
         let cidr: String = args.cidr;
         let cidr_parts = cidr.split('/');
         let ip: String = cidr_parts.clone().nth(0).unwrap().to_string();
