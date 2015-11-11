@@ -1,15 +1,17 @@
-pub static VERSION: &'static str =
-    "cidrr version 0.1.0 by Stuart Hicks (https://github.com/stuarthicks/cidrr)";
+pub static VERSION: &'static str = "cidrr version 0.1.0 by Stuart Hicks \
+                                    (https://github.com/stuarthicks/cidrr)";
 
 pub static USAGE: &'static str = "
-Usage: cidrr <CIDR>
+Usage: cidrr <cidr>
        cidrr (-h | --help)
        cidrr (-v | --version)
 ";
 
 #[derive(Debug, RustcDecodable)]
 pub struct Args {
-    pub cidr: String,
+    pub arg_cidr: String,
+    pub flag_h: bool,
     pub flag_help: bool,
-    pub flag_version: bool
+    pub flag_v: bool,
+    pub flag_version: bool,
 }

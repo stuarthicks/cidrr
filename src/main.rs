@@ -19,19 +19,19 @@ fn main() {
         .and_then(|d| d.decode())
         .unwrap_or_else(|e| e.exit());
 
-    if args.flag_version {
+    if args.flag_version || args.flag_v {
         println!("{}", cli::VERSION);
         exit(0);
     }
 
-    if args.flag_help {
+    if args.flag_help || args.flag_h {
         println!("{}", cli::USAGE);
         exit(0);
     }
 
     let cidr = Cidr::from_args(args);
 
-    if cidr.fixed_bits>32 {
+    if cidr.fixed_bits > 32 {
         println!["Bits out of range!"];
         process::exit(-1);
     }
@@ -48,7 +48,7 @@ pub fn all_with_prefix(base: String, fixed: u8) -> Vec<String> {
     if range_to_calculate == 0 {
         return vec![base.clone()];
     }
-    let max : Vec<String> = (0..range_to_calculate).map(|_| "1".to_string()).collect() ;
+    let max: Vec<String> = (0..range_to_calculate).map(|_| "1".to_string()).collect();
     let max_num = u32::from_str_radix(&(max.clone().join("")), 2).unwrap();
     let mut set: Vec<String> = Vec::new();
     for i in 0..max_num {
@@ -109,11 +109,9 @@ mod tests {
 
     #[test]
     fn it_lists_some_ip_addresses() {
-        let expected: Vec<String> = vec![
-            "192.168.0.0".to_string(),
-            "192.168.0.1".to_string(),
-            "192.168.0.2".to_string()
-        ];
+        let expected: Vec<String> = vec!["192.168.0.0".to_string(),
+                                         "192.168.0.1".to_string(),
+                                         "192.168.0.2".to_string()];
         assert_eq![expected, all_with_prefix("192.168.0.0".to_string(), 30 as u8)]
     }
 }
