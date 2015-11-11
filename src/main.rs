@@ -1,18 +1,41 @@
 // vi: sw=4 ts=4
-extern crate docopt;
 
-use std::{env, process};
+extern crate docopt;
+extern crate rustc_serialize;
+
+use std::process;
+use std::process::exit;
+
+use docopt::Docopt;
 
 mod args;
-use args::Arguments;
+use args::Args;
+
+mod domain;
+use domain::Cidr;
 
 fn main() {
-    let cidr_args = Arguments::parse(env::args());
-    if cidr_args.fixed_bits>32 {
+    let args: Args = Docopt::new(args::USAGE)
+        .and_then(|d| d.decode())
+        .unwrap_or_else(|e| e.exit());
+
+    if args.flag_version {
+        println!("{}", args::VERSION);
+        exit(0);
+    }
+
+    if args.flag_help {
+        println!("{}", args::USAGE);
+        exit(0);
+    }
+
+    let cidr = Cidr::from_args(args);
+
+    if cidr.fixed_bits>32 {
         println!["Bits out of range!"];
         process::exit(-1);
     }
-    let expanded: Vec<String> = all_with_prefix(cidr_args.base_ip, cidr_args.fixed_bits);
+    let expanded: Vec<String> = all_with_prefix(cidr.base_ip, cidr.fixed_bits);
     for ip in expanded.iter() {
         println!["{}", ip];
     }

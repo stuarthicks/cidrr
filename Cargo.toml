@@ -11,4 +11,5 @@ homepage = "https://crates.io/crates/cidrr"
 repository = "https://github.com/stuarthicks/cidrr"
 
 [dependencies]
-docopt = "0.6.67"
+docopt = "0.6"
+rustc-serialize = "0.3"

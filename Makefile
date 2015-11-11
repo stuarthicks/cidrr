@@ -1,14 +1,14 @@
-default: clean test bench
+default: build test
 
 clean:
 	cargo clean
 
-test:
-	RUST_BACKTRACE=1 cargo test --verbose -- --nocapture
-
 build:
 	cargo build --verbose
 	cargo doc --verbose
+
+test:
+	RUST_BACKTRACE=1 cargo test --verbose -- --nocapture
 
 release: test
 	cargo build --verbose --release
