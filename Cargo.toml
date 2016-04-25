@@ -4,7 +4,6 @@ name = "cidrr"
 version = "0.1.0"
 authors = ["Stuart Hicks <contact@stuarthicks.me>"]
 description = "CLI tool for expanding CIDR blocks into lists of IP addresses"
-license = "Apache-2.0"
 license-file = "LICENSE"
 documentation = "https://github.com/stuarthicks/cidrr"
 homepage = "https://crates.io/crates/cidrr"
