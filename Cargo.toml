@@ -1,7 +1,7 @@
 [package]
 
 name = "cidrr"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Stuart Hicks <contact@stuarthicks.me>"]
 description = "CLI tool for expanding CIDR blocks into lists of IP addresses"
 license-file = "LICENSE"
