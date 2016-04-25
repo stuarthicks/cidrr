@@ -1,5 +1,4 @@
 use cli;
-use cli::Args;
 
 pub struct Cidr {
     pub base_ip: String,
